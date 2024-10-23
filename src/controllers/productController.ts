@@ -11,74 +11,28 @@ const readProductsFromFile = (): Product[] => {
 };
 
 let products: Product[] = readProductsFromFile();
-let currentId = 1;
-
-export const createProduct = (req, res) => {
-  const newProduct: Product = { id: currentId++, ...req.body };
-  products.push(newProduct);
-  res.status(201).json(newProduct);
-};
 
 export const getProducts = (req, res) => {
   return res.json({ results: products });
   return;
 };
 
-export const getProductById = (req, res) => {
-  const product = products.find((u) => u.id === +req.params.id);
-  if (!product) return res.status(404).send("Product not found");
-  res.json(product);
-};
-
-export const updateProduct = (req, res) => {
-  const productIndex = products.findIndex((u) => u.id === +req.params.id);
-  if (productIndex === -1) return res.status(404).send("Product not found");
-
-  products[productIndex] = { id: products[productIndex].id, ...req.body };
-  res.json(products[productIndex]);
-};
-
-export const deleteProduct = (req, res) => {
-  const productIndex = products.findIndex((u) => u.id === +req.params.id);
-  if (productIndex === -1) return res.status(404).send("Product not found");
-
-  products.splice(productIndex, 1);
-  res.status(204).send();
-};
-
-// Search products by a search term
-export const searchProducts = (req, res) => {
-  const { term } = req.query;
-  if (!term || typeof term !== "string") {
-    return res.status(400).json({ message: "Search term is required" });
-  }
-
-  const filteredProducts = products.filter(
-    (product: any) =>
-      product.name.toLowerCase().includes(term.toLowerCase()) ||
-      product.description.toLowerCase().includes(term.toLowerCase())
-  );
-
-  res.json({ results: filteredProducts });
-};
-
-// Filter products by name and price range
+// Filter products by search terms, name, price range and ratings
 export const filterProducts = (req, res) => {
-  const { name, category, minPrice, maxPrice } = req.query;
+  const { term, name, minPrice, maxPrice, rating } = req.query;
 
   // Filter by name if provided
   let filteredProducts = products;
+  if (term && typeof term === "string") {
+    filteredProducts = filteredProducts.filter(
+      (product: any) =>
+        product.name.toLowerCase().includes(term.toLowerCase()) ||
+        product.description.toLowerCase().includes(term.toLowerCase())
+    );
+  }
   if (name && typeof name === "string") {
     filteredProducts = filteredProducts.filter((product: any) =>
       product.name.toLowerCase().includes(name.toLowerCase())
-    );
-  }
-
-  // Filter by category if provided
-  if (category && typeof category === "string") {
-    filteredProducts = filteredProducts.filter(
-      (product: any) =>
-        product.category.toLowerCase() === category.toLowerCase()
     );
   }
 
@@ -92,6 +46,12 @@ export const filterProducts = (req, res) => {
   if (maxPrice && !isNaN(Number(maxPrice))) {
     filteredProducts = filteredProducts.filter(
       (product: any) => product.price <= Number(maxPrice)
+    );
+  }
+  // Filter by rating
+  if (rating && !isNaN(Number(rating))) {
+    filteredProducts = filteredProducts.filter(
+      (product: any) => product.review >= Number(rating)
     );
   }
 

@@ -1,5 +1,4 @@
 import express, { Request, Response } from "express";
-import bodyParser from "body-parser";
 import cors from "cors";
 import productRoutes from "./routes/productRoutes";
 
@@ -8,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
-app.use((req: Request, res: Response, next) => {
+app.use((req, res, next) => {
   const token = req.get("Authorization");
 
   if (token) {
@@ -21,7 +20,7 @@ app.use((req: Request, res: Response, next) => {
     });
   }
 });
-app.get("/api", (req: Request, res: Response) => {
+app.get("/api", (req, res) => {
   const help = `
   <pre>
     Welcome to the Products API!
