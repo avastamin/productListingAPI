@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "name": "SwissGear Sion Softside Expandable Luggage, Black, Checked-Large 29-Inch",
+    "price": "78.92",
+    "img": "https://m.media-amazon.com/images/I/71s7HbyqzEL._AC_UL640_FMwebp_QL65_.jpg",
+    "review": 3
+  },
+  {
+    "id": 2,
+    "name": "kensie 22 Graceful Hardside Carry-On Luggage, Light Taupe",
+    "price": "64.20",
+    "img": "https://m.media-amazon.com/images/I/71re6fF1sDL._AC_UL640_FMwebp_QL65_.jpg",
+    "review": 4
+  },
+  {
+    "id": 3,
+    "name": "kensie 22 Graceful Hardside Carry-On Luggage, Light Taupe",
+    "price": "64.20",
+    "img": "https://m.media-amazon.com/images/I/71isssSomgL._AC_UL640_FMwebp_QL65_.jpg",
+    "review": 1
+  },
+  {
+    "id": 4,
+    "name": "kensie 22 Graceful Hardside Carry-On Luggage, Light Taupe",
+    "price": "64.20",
+    "img": "https://m.media-amazon.com/images/I/91RyqYk9mAL._AC_UL640_FMwebp_QL65_.jpg",
+    "review": 4
+  },
+  {
+    "id": 5,
+    "name": "kensie 22 Graceful Hardside Carry-On Luggage, Light Taupe",
+    "price": "164.20",
+    "img": "https://m.media-amazon.com/images/I/81V7zWaF0KL._AC_UL640_FMwebp_QL65_.jpg",
+    "review": 2
+  },
+  {
+    "id": 6,
+    "name": "kensie 22 Graceful Hardside Carry-On Luggage, Light Taupe",
+    "price": "94.20",
+    "img": "https://m.media-amazon.com/images/I/71hBzO2FSAL._AC_UL640_FMwebp_QL65_.jpg",
+    "review": 4
+  },
+  {
+    "id": 7,
+    "name": "kensie 22 Graceful Hardside Carry-On Luggage, Light Taupe",
+    "price": "114.20",
+    "img": "https://m.media-amazon.com/images/I/81wwYRDv4nL._AC_UL640_FMwebp_QL65_.jpg",
+    "review": 4
+  },
+  {
+    "id": 8,
+    "name": "kensie 22 Graceful Hardside Carry-On Luggage, Light Taupe",
+    "price": "84.20",
+    "img": "https://m.media-amazon.com/images/I/81vDzIbwVJL._AC_UL640_FMwebp_QL65_.jpg",
+    "review": 4.5
+  },
+  {
+    "id": 9,
+    "name": "kensie 22 Graceful Hardside Carry-On Luggage, Light Taupe",
+    "price": "69.20",
+    "img": "https://m.media-amazon.com/images/I/71BYWpYC2hL._AC_UL640_FMwebp_QL65_.jpg",
+    "review": 4.9
+  },
+  {
+    "id": 10,
+    "name": "kensie 22 Graceful Hardside Carry-On Luggage, Light Taupe",
+    "price": "99.20",
+    "img": "https://m.media-amazon.com/images/I/91CTDFJWi0L._AC_UL640_FMwebp_QL65_.jpg",
+    "review": 5
+  }
+]
