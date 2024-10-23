@@ -1,8 +1,7 @@
+import { Request, Response } from "express";
 import fs from "fs";
 import path from "path";
 import { Product } from "./../models/product";
-
-import { Request, Response } from "express";
 
 const dataFilePath = path.join(__dirname, "../data/products.json");
 
@@ -21,8 +20,9 @@ export const createProduct = (req: Request, res: Response) => {
   res.status(201).json(newProduct);
 };
 
-export const getProducts = (req: Request, res: Response) => {
-  res.json(products);
+export const getProducts = (req, res) => {
+  return res.json({ results: products });
+  return;
 };
 
 export const getProductById = (req: Request, res: Response) => {
@@ -45,4 +45,20 @@ export const deleteProduct = (req: Request, res: Response) => {
 
   products.splice(productIndex, 1);
   res.status(204).send();
+};
+
+// Search products by a search term
+export const searchProducts = (req, res) => {
+  const { term } = req.query;
+  if (!term || typeof term !== "string") {
+    return res.status(400).json({ message: "Search term is required" });
+  }
+
+  const filteredProducts = products.filter(
+    (product: any) =>
+      product.name.toLowerCase().includes(term.toLowerCase()) ||
+      product.description.toLowerCase().includes(term.toLowerCase())
+  );
+
+  res.json(filteredProducts);
 };

@@ -6,12 +6,14 @@ import {
   getProductById,
   updateProduct,
   deleteProduct,
+  searchProducts,
 } from "../controllers/productController";
 
 const router = Router();
 
-router.post("/products", createProduct);
 router.get("/products", getProducts);
+router.get("/products/search", searchProducts); // Add search route
+router.post("/products", createProduct);
 //router.get("/products/:id", getProductById);
 //router.put("/products/:id", updateProduct);
 //router.delete("/products/:id", deleteProduct);
