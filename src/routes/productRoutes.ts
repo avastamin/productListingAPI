@@ -7,12 +7,14 @@ import {
   updateProduct,
   deleteProduct,
   searchProducts,
+  filterProducts,
 } from "../controllers/productController";
 
 const router = Router();
 
 router.get("/products", getProducts);
 router.get("/products/search", searchProducts); // Add search route
+router.get("/products/filter", filterProducts); // Add search route
 router.post("/products", createProduct);
 //router.get("/products/:id", getProductById);
 //router.put("/products/:id", updateProduct);

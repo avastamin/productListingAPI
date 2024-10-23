@@ -1,4 +1,3 @@
-import { Request, Response } from "express";
 import fs from "fs";
 import path from "path";
 import { Product } from "./../models/product";
@@ -14,7 +13,7 @@ const readProductsFromFile = (): Product[] => {
 let products: Product[] = readProductsFromFile();
 let currentId = 1;
 
-export const createProduct = (req: Request, res: Response) => {
+export const createProduct = (req, res) => {
   const newProduct: Product = { id: currentId++, ...req.body };
   products.push(newProduct);
   res.status(201).json(newProduct);
@@ -25,13 +24,13 @@ export const getProducts = (req, res) => {
   return;
 };
 
-export const getProductById = (req: Request, res: Response) => {
+export const getProductById = (req, res) => {
   const product = products.find((u) => u.id === +req.params.id);
   if (!product) return res.status(404).send("Product not found");
   res.json(product);
 };
 
-export const updateProduct = (req: Request, res: Response) => {
+export const updateProduct = (req, res) => {
   const productIndex = products.findIndex((u) => u.id === +req.params.id);
   if (productIndex === -1) return res.status(404).send("Product not found");
 
@@ -39,7 +38,7 @@ export const updateProduct = (req: Request, res: Response) => {
   res.json(products[productIndex]);
 };
 
-export const deleteProduct = (req: Request, res: Response) => {
+export const deleteProduct = (req, res) => {
   const productIndex = products.findIndex((u) => u.id === +req.params.id);
   if (productIndex === -1) return res.status(404).send("Product not found");
 
@@ -60,5 +59,41 @@ export const searchProducts = (req, res) => {
       product.description.toLowerCase().includes(term.toLowerCase())
   );
 
-  res.json(filteredProducts);
+  res.json({ results: filteredProducts });
+};
+
+// Filter products by name and price range
+export const filterProducts = (req, res) => {
+  const { name, category, minPrice, maxPrice } = req.query;
+
+  // Filter by name if provided
+  let filteredProducts = products;
+  if (name && typeof name === "string") {
+    filteredProducts = filteredProducts.filter((product: any) =>
+      product.name.toLowerCase().includes(name.toLowerCase())
+    );
+  }
+
+  // Filter by category if provided
+  if (category && typeof category === "string") {
+    filteredProducts = filteredProducts.filter(
+      (product: any) =>
+        product.category.toLowerCase() === category.toLowerCase()
+    );
+  }
+
+  // Filter by price range if provided
+  if (minPrice && !isNaN(Number(minPrice))) {
+    filteredProducts = filteredProducts.filter(
+      (product: any) => product.price >= Number(minPrice)
+    );
+  }
+
+  if (maxPrice && !isNaN(Number(maxPrice))) {
+    filteredProducts = filteredProducts.filter(
+      (product: any) => product.price <= Number(maxPrice)
+    );
+  }
+
+  res.json({ results: filteredProducts });
 };
