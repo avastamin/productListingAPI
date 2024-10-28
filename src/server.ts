@@ -32,7 +32,7 @@ app.get("/api", (req, res) => {
     The following endpoints are available:
 
     GET /products
-    POST /products { Product }
+    POST /products/filter
   </pre>
   `;
 
